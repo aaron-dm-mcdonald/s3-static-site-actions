@@ -38,7 +38,7 @@ jobs:
           {
             echo "$(terraform output -raw s3_bucket_name)"
           }
-
+        working-directory: ./terraform
 
 
 
