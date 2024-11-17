@@ -32,12 +32,18 @@ jobs:
         run: terraform apply -auto-approve
         working-directory: ./terraform
 
-      - name: Output S3 Bucket Name
-        id: output_bucket_name
+      - name: Output S3 Bucket Name (Step 1)
+        id: output_bucket_name_step1
         run: |
           BUCKET_NAME=$(terraform output -raw s3_bucket_name)
+        shell: bash
+
+      - name: Set S3 Bucket Name as GitHub Environment Variable (Step 2)
+        id: output_bucket_name_step2
+        run: |
           echo "S3_BUCKET_NAME=$BUCKET_NAME" >> $GITHUB_ENV
         shell: bash
+
 
 
   deploy-web-app:
