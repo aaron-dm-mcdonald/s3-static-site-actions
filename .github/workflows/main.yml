@@ -35,9 +35,9 @@ jobs:
       - name: Output S3 Bucket Name
         id: output_bucket_name
         run: |
-          BUCKET_NAME=$(terraform output -raw s3_bucket_name)
+          BUCKET_NAME=$(terraform output -raw s3_bucket_name || echo "Error: S3 bucket name output not found")
           echo "S3_BUCKET_NAME=$BUCKET_NAME" >> $GITHUB_ENV
-  
+
 
   deploy-web-app:
     runs-on: ubuntu-latest
