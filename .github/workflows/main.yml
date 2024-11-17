@@ -36,9 +36,9 @@ jobs:
         id: output_bucket_name
         run: |
           {
-            BUCKET_NAME=$(terraform output s3_bucket_name)
-            echo "S3_BUCKET_NAME=$BUCKET_NAME"
-          } >> "$GITHUB_ENV"
+            echo "$(terraform output -raw s3_bucket_name)"
+          }
+
 
 
 
