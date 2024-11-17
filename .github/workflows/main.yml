@@ -32,6 +32,10 @@ jobs:
         run: terraform apply -auto-approve
         working-directory: ./terraform
 
+      - name: Output S3 Bucket Name
+        id: output_bucket_name
+        run: echo "S3_BUCKET_NAME=$(terraform output -raw s3_bucket_name)" >> $GITHUB_ENV  
+
   deploy-web-app:
     runs-on: ubuntu-latest
     needs: terraform-deploy
@@ -48,4 +52,4 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy Web App to S3
-        run: aws s3 sync ./web s3://<bucket-name> --delete
+        run: aws s3 sync ./web s3://${{ env.S3_BUCKET_NAME }} --delete
