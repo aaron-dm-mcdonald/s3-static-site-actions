@@ -32,6 +32,13 @@ jobs:
         run: terraform apply -auto-approve
         working-directory: ./terraform
 
+      - name: Output S3 Bucket Name debug
+        id: debug_output_bucket_name
+        run: |
+          echo "terraform output -raw s3_bucket_name | head -n 1"
+        working-directory: ./terraform
+        shell: bash
+
       - name: Output S3 Bucket Name
         id: output_bucket_name
         run: |
