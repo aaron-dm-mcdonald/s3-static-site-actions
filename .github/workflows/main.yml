@@ -55,7 +55,7 @@ jobs:
 
       - name: Use the Environment Variable
         run: |
-          echo ${{env.$MY_VAR}}
+          echo ${{ env.MY_VAR }}
 
 
   deploy-web-app:
