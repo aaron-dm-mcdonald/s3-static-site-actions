@@ -52,6 +52,7 @@ jobs:
           echo "$MY_VAR" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
         working-directory: ./terraform
+        shell: bash
 
       - name: Use the Environment Variable
         run: |
