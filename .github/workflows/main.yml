@@ -41,15 +41,21 @@ jobs:
         working-directory: ./terraform
         shell: bash
   
-      - name: Set an Environment Variable
+      - name: Set the value of MY_VAR
+        id: set_my_var
         run: |
-          MY_VAR=$(terraform output s3_bucket_name)
-          echo "MY_VAR=$MY_VAR" >> $GITHUB_ENV
+          # Capture the output of the terraform command and remove quotes
+          MY_VAR=$(terraform output s3_bucket_name | tr -d '"')
+
+          # Use the format for multi-line text
+          echo "MY_VAR<<EOF" >> $GITHUB_ENV
+          echo "$MY_VAR" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
         working-directory: ./terraform
 
       - name: Use the Environment Variable
         run: |
-          echo "The value of MY_VAR is: $MY_VAR"
+          echo ${{env.$MY_VAR}}
 
 
   deploy-web-app:
