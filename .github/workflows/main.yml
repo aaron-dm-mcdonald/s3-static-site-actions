@@ -41,6 +41,14 @@ jobs:
         working-directory: ./terraform
         shell: bash
   
+      - name: Set an Environment Variable
+        run: |
+          MY_VAR="Hello, GitHub Actions!"
+          echo "MY_VAR=$MY_VAR" >> $GITHUB_ENV
+
+      - name: Use the Environment Variable
+        run: |
+          echo "The value of MY_VAR is: $MY_VAR"
 
 
   deploy-web-app:
@@ -59,8 +67,5 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy Web App to S3
-        run: aws s3 sync ./web s3://$(terraform output -raw s3_bucket_name) --delete
-        working-directory: ./terraform
-        shell: bash
-
+        run: aws s3 sync ./web s3://${{ env.S3_BUCKET_NAME }} --delete
       
