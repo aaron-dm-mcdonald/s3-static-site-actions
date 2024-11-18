@@ -43,7 +43,7 @@ jobs:
   
       - name: Set an Environment Variable
         run: |
-          MY_VAR=$(terraform output s3_bucket_name | tr -d '"')
+          MY_VAR=$(terraform output s3_bucket_name)
           echo "MY_VAR=$MY_VAR" >> $GITHUB_ENV
         working-directory: ./terraform
 
