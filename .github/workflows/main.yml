@@ -45,10 +45,8 @@ jobs:
       - name: Output S3 Bucket Name
         id: output_bucket_name
         run: |
-          BUCKET_NAME=$(terraform output -raw s3_bucket_name 2>/dev/null | head -n 1)
+          BUCKET_NAME=$(terraform output s3_bucket_name | tr -d '"' )
           echo "BUCKET_NAME=$BUCKET_NAME" # Print to check output
-          echo "test"
-          echo "S3_BUCKET_NAME=$BUCKET_NAME" >> $GITHUB_ENV
         working-directory: ./terraform
         shell: bash
 
