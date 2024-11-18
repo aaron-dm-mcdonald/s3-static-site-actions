@@ -35,7 +35,7 @@ jobs:
       - name: Output S3 Bucket Name debug
         id: debug_output_bucket_name
         run: |
-          terraform output -raw s3_bucket_name
+          terraform output -raw "s3_bucket_name"
           terraform output s3_bucket_name 
         working-directory: ./terraform
         shell: bash
