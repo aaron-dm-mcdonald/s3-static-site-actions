@@ -7,6 +7,6 @@ output "s3_bucket_name" {
 # }
 
 output "s3_website_url" {
-  value = "http://${aws_s3_bucket.web_bucket.website_endpoint}"
+  value = "https://${aws_s3_bucket.web_bucket.website_endpoint}"
   depends_on = [ aws_s3_bucket_policy.web_bucket_policy ]
 }
